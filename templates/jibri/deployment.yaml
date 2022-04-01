@@ -68,6 +68,19 @@ spec:
           mountPath: /dev/shm
         {{- end }}
 
+    {{- with .Values.jibri.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.jibri.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.jibri.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+
       volumes:
       - name: jibri-data
         {{- if .Values.jibri.persistence.enabled }}

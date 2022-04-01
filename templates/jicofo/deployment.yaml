@@ -61,6 +61,10 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.jicofo.resources | nindent 12 }}
+          {{- with .Values.jicofo.extraVolumeMounts }}
+          volumeMounts:
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
 
       {{- with .Values.jicofo.nodeSelector }}
       nodeSelector:
@@ -72,5 +76,9 @@ spec:
     {{- end }}
     {{- with .Values.jicofo.tolerations }}
       tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.jicofo.extraVolumes }}
+      volumes:
         {{- toYaml . | nindent 8 }}
     {{- end }}
